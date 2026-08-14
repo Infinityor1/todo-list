@@ -38,8 +38,8 @@ class TaskController extends Controller
      */
     public function show(string $id)
     {
-        $task=Task::find($id);
-        return response()->json($task);
+        $tasks=Task::get()->where("user_id",$id);
+        return response()->json($tasks);
     }
 
     /**
