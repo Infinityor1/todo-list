@@ -1,10 +1,11 @@
 <script setup>
-import List from "./List.vue";
+import { onMounted } from "vue";
+import { RouterLink,RouterView } from "vue-router";
+
 </script>
 
 <template>
-  <h1>ToDo-List App</h1>
-  <div id="main"><List /></div>
+  <RouterView/>
 </template>
 
 <style scoped>

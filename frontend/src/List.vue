@@ -1,11 +1,12 @@
 <script setup>
 //import tasks from "@/test.json";
-import axios from "axios";
+import api from "./services/api";
 import { ref, onMounted } from "vue";
+import Header from "./Header.vue";
 const tasks = ref([]);
 const fetchTasks = async () => {
   try {
-    const response = await axios.get("http://127.0.0.1:8000/api/tasks/1");
+    const response = await api.get("/api/tasks/1");
     console.log(response.data);
     tasks.value = response.data;
     return response.data;
@@ -28,6 +29,7 @@ const fetchTasks = async () => {
 onMounted(fetchTasks);
 </script>
 <template>
+  <Header/>
   <div id="list">
     <div class="task-header">
       <div></div>
