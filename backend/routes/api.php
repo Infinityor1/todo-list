@@ -19,6 +19,12 @@ Route::middleware('web')->group (function(){
        
     });
      Route::get('/get-csrf-token', [AuthController::class,'getCsrfToken']);  
+     Route::get('/debug-session', function (Request $request) {
+    return response()->json([
+        'session_id' => $request->session()->getId(),
+        'session_token' => $request->session()->token(),
+    ]);
+});
 Route::get('/', function () {
     return response()->json(['status' => 'API is running']);
 });});

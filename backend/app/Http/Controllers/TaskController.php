@@ -5,16 +5,16 @@ use App\Models\Task;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks=Task::all();
+        $tasks=Task::get()->where("user_id",Auth::id());
         return response()->json($tasks, 200);
     }
 

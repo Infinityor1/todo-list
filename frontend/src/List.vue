@@ -6,7 +6,7 @@ import Header from "./Header.vue";
 const tasks = ref([]);
 const fetchTasks = async () => {
   try {
-    const response = await api.get("/api/tasks/1");
+    const response = await api.get("/api/tasks/");
     console.log(response.data);
     tasks.value = response.data;
     return response.data;

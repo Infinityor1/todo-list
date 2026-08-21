@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Log;
 class AuthController extends Controller
 {
     public function register(Request $request){
@@ -30,6 +30,7 @@ class AuthController extends Controller
     return response()->json(["User"=>$user,"message"=>"Registration success"]);
     }
     public function login(Request $request) {
+
         $validated = $request->validate([
             'email' => 'required|string|email|max:255',
             'password' => 'required|string',
@@ -45,6 +46,7 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Login successful',
             'user' => $request->user(),
+            'csrf_token' => csrf_token()
         ]);
 
     }
@@ -53,9 +55,11 @@ class AuthController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        
 
         return response()->json([
-            'message' => 'Logout successful'
+            'message' => 'Logout successful',
+            'csrf_token' => csrf_token()
         ]);}
     public function user(Request $request){
         return response()->json(['user'=>$request->user()]);
